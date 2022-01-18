@@ -5,6 +5,10 @@ class Horloge extends Component {
         date: new Date(),
     }
 
+    componentDidMount() {
+        console.log("composant monté");
+    }
+
     render(){
         return <h2>Horloge : {this.state.date.toLocaleTimeString()}</h2>
     }
