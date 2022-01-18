@@ -4,4 +4,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render("Hello World !", document.getElementById("root"));
+ReactDOM.render(
+    // Code JS
+    // React.createElement("h1",null,"Hello World !"),
+    // document.getElementById("root")
+    // Code JSX
+    <h1 className="test">Hello World !</h1>, 
+    document.getElementById("root")
+);
