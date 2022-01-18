@@ -27,9 +27,9 @@ class App extends Component {
     render() {
         return (
             <>
-                <Personne />
-                <Personne />
-                <Personne />
+                <Personne nom="Matthieu" age="31" sexe="Homme"/>
+                <Personne nom="Tya" age="25" sexe="Femme"/>
+                <Personne nom="Milo" age="43" sexe="Homme"/>
             </>
         );
     }

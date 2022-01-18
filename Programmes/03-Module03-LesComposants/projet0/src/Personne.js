@@ -1,11 +1,13 @@
 import React from 'react';
 
-function personne() {
+// Utilisation du système de propriété, props pour indiquer les propriétés que l'on récupère
+// Syntaxe ES6
+const personne = props => {
     return (
         <>
-            <h1>Matthieu</h1>
-            <div>Age : 31</div>
-            <div>Sexe : Homme</div>
+            <h1>{props.nom}</h1>
+            <div>Age : {props.age}</div>
+            <div>Sexe : {props.sexe}</div>
         </>   
     );
 }
