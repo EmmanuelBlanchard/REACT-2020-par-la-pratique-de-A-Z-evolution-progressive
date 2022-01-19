@@ -14,8 +14,23 @@ class App extends Component {
         ]
     }
 
-    anniversaireHandler() {
-        console.log("Anniversaire");
+    anniversaireHandler = () => {
+        // Immutabilité des données dans le state de personnes, nouveau tableau
+        // const newPersonnes = this.state.personnes.slice();
+        // const newPersonnes = [...this.state.personnes];
+        // for(let i = 0 ; i < newPersonnes.length ; i++) {
+        //     newPersonnes[i].age ++;
+        // }
+        // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+        const newPersonnes = this.state.personnes.map(personne => {
+            return {
+                nom: personne.nom,
+                age: personne.age + 1,
+                sexe: personne.sexe
+            };
+        })
+        // Le nouveau tableau newPersonnes peut remplacer celui que l'on a dans le state
+        this.setState({personnes: newPersonnes});
     }
 
     // Envoyer toutes les propriétés de la liste de personnes du state => utilisation de l'opérateur spread : <Personne {...this.state.personnes[0]}/>
