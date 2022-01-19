@@ -9,19 +9,23 @@ import "./App.css";
 class App extends Component {
     state = {
         personnes : [
-            {nom : "Matthieu", age : 31, sexe: true},
-            {nom : "Tya", age : 25, sexe: false},
-            {nom : "Milo", age : 43, sexe: true},
-            {nom : "Toto", age : 23, sexe: true},
+            {id: 1, nom : "Matthieu", age : 31, sexe: true},
+            {id: 2, nom : "Tya", age : 25, sexe: false},
+            {id: 5, nom : "Milo", age : 43, sexe: true},
+            {id: 7, nom : "Toto", age : 23, sexe: true},
         ]
     }
 
-    anniversaireHandler = (numeroPersonne) => {
+    anniversaireHandler = (id) => {
+        // Recupere le numéro de la case de la personne sur laquelle on veut apporter la modification
+        const numeroCaseTabPersonne = this.state.personnes.findIndex(element => {
+            return element.id === id;
+        })
         // Recuperer la personne concernée 
-        const newPersonne = {...this.state.personnes[numeroPersonne]}; // Génére une copie de la personne sur laquelle on a cliqué
+        const newPersonne = {...this.state.personnes[numeroCaseTabPersonne]}; // Génére une copie de la personne sur laquelle on a cliqué
         newPersonne.age++; // Augmente l'age de la personne copiée
         const newTab = [...this.state.personnes]; // On duplique le tableau de personnes
-        newTab[numeroPersonne] = newPersonne; // On remplace la personne à l'indice du tableau sur lequel on a cliqué par la nouvelle personne qu'on a crée
+        newTab[numeroCaseTabPersonne] = newPersonne; // On remplace la personne à l'indice du tableau sur lequel on a cliqué par la nouvelle personne qu'on a crée
         // On remplace dans le state, le tableau de personnes par Le nouveau tableau newTab
         this.setState({personnes: newTab});
     }
@@ -54,10 +58,10 @@ class App extends Component {
                 <button onClick={this.anniversairesHandler}>Anniversaire</button>
                 <Horloge />
                 {
-                    this.state.personnes.map( (personne,index) => {
+                    this.state.personnes.map(personne => {
                         return (
                             [
-                                <Personne {...personne} clic={() => this.anniversaireHandler(index)}>
+                                <Personne key={personne.id} {...personne} clic={() => this.anniversaireHandler(personne.id)}>
                                     <AgePersonne age={personne.age}/>
                                 </Personne>
                             ]
