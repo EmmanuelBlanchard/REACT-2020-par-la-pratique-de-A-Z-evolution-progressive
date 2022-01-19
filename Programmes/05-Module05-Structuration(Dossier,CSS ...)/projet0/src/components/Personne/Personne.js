@@ -1,13 +1,21 @@
 import React, {Component} from "react";
 import AgePersonne from "./AgePersonne/AgePersonne";
+import classes from "./Personne.module.css";
 
 class Personne extends Component {
     render() {
+        // CSS Dynamique avec l'attribut style
+        const monStyle = {
+            color:"#3D836D",
+            fontWeight:"bold"
+        }
+        monStyle.fontSize = "16px";
+
         return (
             <>
-                <h1>{this.props.nom}</h1>
+                <h1 className={classes.monTitre}>{this.props.nom}</h1>
                 <AgePersonne age={this.props.age}/>
-                <div>Sexe : {this.props.sexe}</div>
+                <div style={monStyle}>Sexe : {this.props.sexe}</div>
             </>
         );
     } 
