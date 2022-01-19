@@ -6,16 +6,26 @@ class Personne extends Component {
     render() {
         // CSS Dynamique avec l'attribut style
         const monStyle = {
-            color:"#3D836D",
+            color:"white",
             fontWeight:"bold"
         }
         monStyle.fontSize = "16px";
+
+        if(this.props.sexe) {
+            monStyle.backgroundColor = "#3D836D";
+        } else {
+            monStyle.backgroundColor = "#c8102E";
+        }
+
+        // let affichageSexe = "Homme";
+        // if(!this.props.sexe) affichageSexe = "Femme";
 
         return (
             <>
                 <h1 className={classes.monTitre}>{this.props.nom}</h1>
                 <AgePersonne age={this.props.age}/>
-                <div style={monStyle}>Sexe : {this.props.sexe}</div>
+                <div style={monStyle}>Sexe : {this.props.sexe ? "Homme" : "Femme"}</div>
+                {/* <div style={monStyle}>Sexe : {affichageSexe}</div> */}
             </>
         );
     } 

@@ -6,13 +6,22 @@ import Horloge from "./containers/Horloge/Horloge";
 import "./App.css";
 
 class App extends Component {
+    state = {
+        personnes : [
+            {nom : "Matthieu", age : 31, sexe: true},
+            {nom : "Tya", age : 25, sexe: false},
+            {nom : "Milo", age : 43, sexe: true},
+        ]
+    }
+    // Envoyer toutes les propriétés de la liste de personnes du state => utilisation de l'opérateur spread : <Personne {...this.state.personnes[0]}/>
+    // Envoyer que certaines propriétés de la liste de personnes du state : <Personne nom={this.state.personnes[1].nom} age={this.state.personnes[1].age} sexe={this.state.personnes[1].sexe}/>
     render() {
         return (
             <>
                 <Horloge />
-                <Personne nom="Matthieu" age="31" sexe="Homme"/>
-                <Personne nom="Tya" age="25" sexe="Femme"/>
-                <Personne nom="Milo" age="43" sexe="Homme"/>
+                <Personne {...this.state.personnes[0]}/>
+                <Personne {...this.state.personnes[1]}/>
+                <Personne {...this.state.personnes[2]}/>
             </>
         );
     }
