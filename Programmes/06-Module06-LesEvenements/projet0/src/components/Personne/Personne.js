@@ -17,15 +17,13 @@ class Personne extends Component {
             monStyle.backgroundColor = "#c8102E";
         }
 
-        // let affichageSexe = "Homme";
-        // if(!this.props.sexe) affichageSexe = "Femme";
-
         return (
             <>
                 <h1 className={classes.monTitre}>{this.props.nom}</h1>
                 <AgePersonne age={this.props.age}/>
                 <div style={monStyle}>Sexe : {this.props.sexe ? "Homme" : "Femme"}</div>
-                {/* <div style={monStyle}>Sexe : {affichageSexe}</div> */}
+                
+                <button onClick={this.props.clic}>Anniversaire</button>
             </>
         );
     } 

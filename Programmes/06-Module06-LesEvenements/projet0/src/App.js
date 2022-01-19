@@ -14,7 +14,18 @@ class App extends Component {
         ]
     }
 
-    anniversaireHandler = () => {
+    anniversaireHandler = (numeroPersonne) => {
+        // Recuperer la personne concernée 
+        const newPersonne = {...this.state.personnes[numeroPersonne]}; // Génére une copie de la personne sur laquelle on a cliqué
+        newPersonne.age++; // Augmente l'age de la personne copiée
+        const newTab = [...this.state.personnes]; // On duplique le tableau de personnes
+        newTab[numeroPersonne] = newPersonne; // On remplace la personne à l'indice du tableau sur lequel on a cliqué par la nouvelle personne qu'on a crée
+        // On remplace dans le state, le tableau de personnes par Le nouveau tableau newTab
+        this.setState({personnes: newTab});
+    }
+
+    // Pour augmenter l'anniversaire de tous les personnes
+    anniversairesHandler = () => {
         // Immutabilité des données dans le state de personnes, nouveau tableau
         // const newPersonnes = this.state.personnes.slice();
         // const newPersonnes = [...this.state.personnes];
@@ -38,11 +49,11 @@ class App extends Component {
     render() {
         return (
             <>
-                <button onClick={this.anniversaireHandler}>Anniversaire</button>
+                <button onClick={this.anniversairesHandler}>Anniversaire</button>
                 <Horloge />
-                <Personne {...this.state.personnes[0]}/>
-                <Personne {...this.state.personnes[1]}/>
-                <Personne {...this.state.personnes[2]}/>
+                <Personne {...this.state.personnes[0]} clic={() => this.anniversaireHandler(0)}/>
+                <Personne {...this.state.personnes[1]} clic={this.anniversaireHandler.bind(this,1)}/>
+                <Personne {...this.state.personnes[2]} clic={() => this.anniversaireHandler(2)}/>
             </>
         );
     }
