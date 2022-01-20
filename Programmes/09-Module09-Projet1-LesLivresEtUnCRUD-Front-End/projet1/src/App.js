@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div className="container">
         <TitreH1>Page listant les livres</TitreH1>
-        <Livres />
+        <Livres ajoutLivre={this.state.ajoutLivre}/>
         <Bouton 
           typeBtn="btn-success" 
           css="w-100" 

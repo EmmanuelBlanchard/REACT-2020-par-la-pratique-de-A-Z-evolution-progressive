@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Livre from './Livre/Livre';
+import FormulaireAjout from './FormulaireAjout/FormulaireAjout';
 
 class Livres extends Component {
     state = {
@@ -24,32 +25,35 @@ class Livres extends Component {
 
     render() {
         return (
-            <table className="table text-center">
-                <thead>
-                    <tr className="table-dark">
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Nombre de pages</th>
-                        <th colSpan="2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        this.state.livres.map(livre => {
-                            return (
-                                <tr key={livre.id}>
-                                    <Livre 
-                                        titre={livre.titre}
-                                        auteur={livre.auteur}
-                                        nombreDePages={livre.nombreDePages}
-                                        suppression={ () => this.handleSuppressionLivre(livre.id)}
-                                    />
-                                </tr>
-                            );
-                        })
-                    }
-                </tbody>
-            </table>
+            <>
+                <table className="table text-center">
+                    <thead>
+                        <tr className="table-dark">
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Nombre de pages</th>
+                            <th colSpan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.livres.map(livre => {
+                                return (
+                                    <tr key={livre.id}>
+                                        <Livre 
+                                            titre={livre.titre}
+                                            auteur={livre.auteur}
+                                            nombreDePages={livre.nombreDePages}
+                                            suppression={ () => this.handleSuppressionLivre(livre.id)}
+                                        />
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
+                {this.props.ajoutLivre && <FormulaireAjout />}
+            </>
         );
     }
 }
