@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { render } from 'react-dom';
 
-function App() {
-  return (
-    <>
-      <h1>Titre</h1>
-      <div>Livres</div>
-      <button>Ajouter</button>
-    </>
-  );
+class App extends Component {
+  render() {
+    return (
+      <>
+        <div className="container">
+          <h1>Titre</h1>
+          <div>Livres</div>
+          <button>Ajouter</button>
+        </div>
+        
+      </>
+    );
+  }
+  
 }
 
 export default App;
