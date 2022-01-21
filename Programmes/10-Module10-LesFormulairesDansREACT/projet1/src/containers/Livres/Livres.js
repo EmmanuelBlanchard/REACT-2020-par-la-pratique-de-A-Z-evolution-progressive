@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Livre from './Livre/Livre';
 import FormulaireAjoutLivre from './FormulaireAjoutLivre/FormulaireAjoutLivre';
 import FormulaireModificationLivre from './FormulaireModificationLivre/FormulaireModificationLivre';
+import Alert from '../../components/Alert/Alert';
 
 class Livres extends Component {
     state = {
@@ -12,7 +13,8 @@ class Livres extends Component {
             {id:8, titre:"Le Virus d'Asie", auteur: "Tya MILO", nombreDePages: 120},
         ],
         lastIdLivre : 8,
-        idLivreAModifier : 0
+        idLivreAModifier : 0,
+        alertMessage : null
     }
 
     handleSuppressionLivre = (id) => {
@@ -23,7 +25,13 @@ class Livres extends Component {
         const newLivres = [...this.state.livres];
         newLivres.splice(livreIndexTab,1);
 
-        this.setState({livres:newLivres});
+        this.setState({
+            livres:newLivres,
+            alertMessage: {
+                message : "Suppression du livre effectuée",
+                type : "alert-danger"
+            }
+        });
     }
 
     handleAjoutLivre = (titre,auteur,nombreDePages) => {
@@ -40,7 +48,11 @@ class Livres extends Component {
         this.setState(oldState => {
             return {
                 livres: newListeLivres,
-                lastIdLivre: oldState.lastIdLivre + 1
+                lastIdLivre: oldState.lastIdLivre + 1,
+                alertMessage: {
+                    message : "Ajout du livre effectuée",
+                    type : "alert-success"
+                }
             }
         })
         this.props.fermerAjoutLivre();
@@ -58,13 +70,18 @@ class Livres extends Component {
 
         this.setState({
             livres : newListe,
-            idLivreAModifier : 0
+            idLivreAModifier : 0,
+            alertMessage: {
+                message : "Modification du livre effectuée",
+                type : "alert-warning"
+            }
         })
     }
 
     render() {
         return (
             <>
+                {this.state.alertMessage && <Alert typeAlert={this.state.alertMessage.type}>{this.state.alertMessage.message}</Alert>}
                 <table className="table text-center">
                     <thead>
                         <tr className="table-dark">
