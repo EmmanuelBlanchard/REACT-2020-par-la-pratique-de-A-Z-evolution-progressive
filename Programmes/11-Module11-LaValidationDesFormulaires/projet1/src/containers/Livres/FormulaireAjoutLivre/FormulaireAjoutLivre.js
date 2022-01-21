@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Bouton from '../../../components/Bouton/Bouton';
 import { withFormik } from 'formik';
+import * as Yup from 'yup';
 
 class FormulaireAjoutLivre extends Component {
     // state = {
@@ -59,7 +60,7 @@ class FormulaireAjoutLivre extends Component {
                             id="nombreDePages" 
                             name="nombreDePages" 
                             value={this.props.values.nombreDePages}
-                            onChange={this.props.handleChange} 
+                            onChange={(event) => this.props.setFieldValue('nombreDePages', +event.target.value)} 
                             onBlur={this.props.handleBlur}
                         />
                         {
@@ -80,25 +81,18 @@ export default withFormik({
         auteur:'',
         nombreDePages:'',
     }),
-    validate: values => {
-        const errors = {};
-        if(values.titre.length < 3) {
-            errors.titre = "Le titre doit avoir plus de 3 caractères";
-        }
-        if(values.titre.length > 15) {
-            errors.titre = "Le titre doit avoir moins de 15 caractères";
-        }
-        if(!values.titre) {
-            errors.titre = "Le champ Titre du livre est obligatoire";
-        }
-        if(!values.auteur) {
-            errors.auteur = "Le champ Auteur est obligatoire";
-        }
-        if(!values.nombreDePages) {
-            errors.nombreDePages = "Le champ Nombre de pages est obligatoire";
-        }
-        return errors;
-    },
+    validationSchema : Yup.object().shape({
+        titre : Yup.string()
+                    .min(3,'Le titre doit avoir plus de 3 caractères')
+                    .max(15,'Le titre doit avoir moins de 15 caractères')
+                    .required("Le titre est obligatoire"),
+        auteur: Yup.string()
+                    .min(3,"L'auteur doit avoir plus de 3 caractères")
+                    .required("L'auteur est obligatoire"),
+        nombreDePages: Yup.number()
+                    .lessThan(1000,'Le nombre de pages doit etre inférieur à 1000 !')
+                    .moreThan(50,'Le nombre de pages doit etre supérieur à 50 !')
+    }),
     handleSubmit: (values,{props}) => {
         // Dans le composant withFormik, qui n'est pas de type classe, donc pas this.props
         props.validation(values.titre,values.auteur,values.nombreDePages)
