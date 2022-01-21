@@ -6,7 +6,7 @@ import Personnage from './Personnage/Personnage';
 class CreateurPersonnage extends Component {
     state = {
         personnage : {
-            image : 1,
+            image : 3,
             force : 0,
             agilite : 0,
             intelligence : 0
