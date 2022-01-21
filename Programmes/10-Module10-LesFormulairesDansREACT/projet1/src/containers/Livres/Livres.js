@@ -9,7 +9,8 @@ class Livres extends Component {
             {id:3, titre:"La France du 19ème", auteur: "Albert PATRICK", nombreDePages: 500},
             {id:5, titre:"Le monde des animaux", auteur: "Marc MERLIN", nombreDePages: 250},
             {id:8, titre:"Le Virus d'Asie", auteur: "Tya MILO", nombreDePages: 120},
-        ]
+        ],
+        lastIdLivre : 8,
     }
 
     handleSuppressionLivre = (id) => {
@@ -24,9 +25,22 @@ class Livres extends Component {
     }
 
     handleAjoutLivre = (titre, auteur, nombreDePages) => {
-        console.log(titre);
-        console.log(auteur);
-        console.log(nombreDePages);
+        const newLivre = {
+            id: this.state.lastIdLivre + 1, 
+            titre: titre, 
+            auteur: auteur, 
+            nombreDePages: nombreDePages
+        };
+
+        const newListeLivres = [...this.state.livres];
+        newListeLivres.push(newLivre);
+
+        this.setState(oldState => {
+            return {
+                livres: newListeLivres,
+                lastIdLivre: oldState.lastIdLivre + 1
+            }
+        })
     }
 
     render() {
