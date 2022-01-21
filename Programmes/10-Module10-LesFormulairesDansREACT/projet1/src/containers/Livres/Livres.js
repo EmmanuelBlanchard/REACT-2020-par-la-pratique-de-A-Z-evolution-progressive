@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Livre from './Livre/Livre';
-import FormulaireAjout from './FormulaireAjout/FormulaireAjout';
+import FormulaireAjoutLivre from './FormulaireAjoutLivre/FormulaireAjoutLivre';
+import FormulaireModificationLivre from './FormulaireModificationLivre/FormulaireModificationLivre';
 
 class Livres extends Component {
     state = {
@@ -11,6 +12,7 @@ class Livres extends Component {
             {id:8, titre:"Le Virus d'Asie", auteur: "Tya MILO", nombreDePages: 120},
         ],
         lastIdLivre : 8,
+        idLivreAModifier : 0
     }
 
     handleSuppressionLivre = (id) => {
@@ -24,7 +26,7 @@ class Livres extends Component {
         this.setState({livres:newLivres});
     }
 
-    handleAjoutLivre = (titre, auteur, nombreDePages) => {
+    handleAjoutLivre = (titre,auteur,nombreDePages) => {
         const newLivre = {
             id: this.state.lastIdLivre + 1, 
             titre: titre, 
@@ -44,6 +46,22 @@ class Livres extends Component {
         this.props.fermerAjoutLivre();
     }
 
+    handleModificationLivre = (id,titre,auteur,nombreDePages) => {
+        const caseLivre = this.state.livres.findIndex(livre => {
+            return livre.id === id;
+        });
+
+        const newLivre = {id,titre,auteur,nombreDePages};
+
+        const newListe = [...this.state.livres];
+        newListe[caseLivre] = newLivre;
+
+        this.setState({
+            livres : newListe,
+            idLivreAModifier : 0
+        })
+    }
+
     render() {
         return (
             <>
@@ -59,21 +77,36 @@ class Livres extends Component {
                     <tbody>
                         {
                             this.state.livres.map(livre => {
-                                return (
-                                    <tr key={livre.id}>
-                                        <Livre 
+                                if(livre.id !== this.state.idLivreAModifier) {
+                                    return (
+                                        <tr key={livre.id}>
+                                            <Livre 
+                                                titre={livre.titre}
+                                                auteur={livre.auteur}
+                                                nombreDePages={livre.nombreDePages}
+                                                suppression={ () => this.handleSuppressionLivre(livre.id)}
+                                                modification={ () => this.setState({idLivreAModifier:livre.id})}
+                                            />
+                                        </tr>
+                                    );
+                                } else {
+                                    return (
+                                        <tr key={livre.id}>
+                                            <FormulaireModificationLivre 
+                                            id={livre.id}
                                             titre={livre.titre}
                                             auteur={livre.auteur}
                                             nombreDePages={livre.nombreDePages}
-                                            suppression={ () => this.handleSuppressionLivre(livre.id)}
-                                        />
-                                    </tr>
-                                );
+                                            validationModification={this.handleModificationLivre}
+                                            />
+                                        </tr>
+                                    );
+                                }
                             })
                         }
                     </tbody>
                 </table>
-                {this.props.ajoutLivre && <FormulaireAjout validation={this.handleAjoutLivre}/>}
+                {this.props.ajoutLivre && <FormulaireAjoutLivre validation={this.handleAjoutLivre}/>}
             </>
         );
     }

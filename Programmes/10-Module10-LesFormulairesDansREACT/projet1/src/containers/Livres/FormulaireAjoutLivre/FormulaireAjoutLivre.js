@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Bouton from '../../../components/Bouton/Bouton';
 
-class FormulaireAjout extends Component {
+class FormulaireAjoutLivre extends Component {
     state = {
         titreSaisi : "",
         auteurSaisi : "",
@@ -53,4 +53,4 @@ class FormulaireAjout extends Component {
     }
 }
 
-export default FormulaireAjout;
+export default FormulaireAjoutLivre;
