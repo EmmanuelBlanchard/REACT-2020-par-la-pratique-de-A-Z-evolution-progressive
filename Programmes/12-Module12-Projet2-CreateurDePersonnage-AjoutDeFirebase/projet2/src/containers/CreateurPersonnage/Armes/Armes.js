@@ -21,7 +21,11 @@ const armes = (props) => (
             }
             return (
                 <div className="col-3" key={arme}>
-                    <Arme imageArme={imgArme}>{arme}</Arme>
+                    <Arme 
+                        imageArme={imgArme}
+                        isCurrentArme={props.currentArme === arme}
+                        clic={() => props.changeArme(arme)}
+                    >{arme}</Arme>
                 </div>
             );
         })}
