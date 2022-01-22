@@ -6,18 +6,40 @@ import Personnage from './Personnage/Personnage';
 class CreateurPersonnage extends Component {
     state = {
         personnage : {
-            image : 3,
+            image : 1,
             force : 0,
             agilite : 0,
             intelligence : 0
         }
     }
 
+    handleImagePrecedente = () => {
+        this.setState(oldState => {
+            const newPersonnage = {...oldState.personnage};
+            if(oldState.personnage.image <= 1) newPersonnage.image = 3;
+            else newPersonnage.image --;
+            return {personnage:newPersonnage};
+        })
+    }
+
+    handleImageSuivante = () => {
+        this.setState(oldState => {
+            const newPersonnage = {...oldState.personnage};
+            if(oldState.personnage.image >= 3) newPersonnage.image = 1;
+            else newPersonnage.image ++;
+            return {personnage:newPersonnage};
+        })
+    }
+
     render() {
         return (
             <div className="container">
                 <TitreH1>Créateur de personnage</TitreH1>
-                <Personnage {...this.state.personnage}/>
+                <Personnage 
+                    {...this.state.personnage}
+                    precedente={this.handleImagePrecedente}
+                    suivante={this.handleImageSuivante}
+                />
                 <div>Armes</div>
                 <div className="row no-gutters">
                     <Bouton typeBtn="btn-danger" css="col-6" clic={ () => console.log("Réinitialisation")}>Réinitialiser</Bouton>

@@ -4,7 +4,11 @@ import ImagePersonnage from './ImagePersonnage/ImagePersonnage';
 const personnage = (props) => (
     <div className="row no-gutters">
         <div className="col-6">
-            <ImagePersonnage numImage={props.image}/>
+            <ImagePersonnage
+                numImage={props.image}
+                flecheGauche={props.precedente}
+                flecheDroite={props.suivante}
+            />
         </div>
         <div className="col-6">
             Force : {props.force} <br />
