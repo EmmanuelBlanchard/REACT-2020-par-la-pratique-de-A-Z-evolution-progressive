@@ -10,9 +10,21 @@ const caracPersonnage = (props) => (
             </span>
         </div>
         <div>
-            <Carateristique nombrePoints={props.force}>Force</Carateristique>
-            <Carateristique nombrePoints={props.agilite}>Agilite</Carateristique>
-            <Carateristique nombrePoints={props.intelligence}>Intelligence</Carateristique>
+            <Carateristique 
+                nombrePoints={props.force}
+                moins={() => props.enleverPoint('force')}
+                plus={() => props.ajouterPoint('force')}
+            >Force</Carateristique>
+            <Carateristique 
+                nombrePoints={props.agilite}
+                moins={() => props.enleverPoint('agilite')}
+                plus={() => props.ajouterPoint('agilite')}
+            >Agilite</Carateristique>
+            <Carateristique 
+                nombrePoints={props.intelligence}
+                moins={() => props.enleverPoint('intelligence')}
+                plus={() => props.ajouterPoint('intelligence')}
+            >Intelligence</Carateristique>
         </div>
     </>
 );
