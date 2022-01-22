@@ -1,4 +1,5 @@
 import React from 'react';
+import Carateristique from './Carac/Carac';
 
 const caracPersonnage = (props) => (
     <>
@@ -9,9 +10,9 @@ const caracPersonnage = (props) => (
             </span>
         </div>
         <div>
-            Force : {props.force} <br />
-            Agilite : {props.agilite} <br />
-            Intelligence : {props.intelligence}
+            <Carateristique nombrePoints={props.force}>Force</Carateristique>
+            <Carateristique nombrePoints={props.agilite}>Agilite</Carateristique>
+            <Carateristique nombrePoints={props.intelligence}>Intelligence</Carateristique>
         </div>
     </>
 );
