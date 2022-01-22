@@ -7,10 +7,11 @@ class CreateurPersonnage extends Component {
     state = {
         personnage : {
             image : 1,
-            force : 0,
-            agilite : 0,
-            intelligence : 0
-        }
+            force : 2,
+            agilite : 3,
+            intelligence : 1
+        },
+        nombrePointsDisponibles : 7
     }
 
     handleImagePrecedente = () => {
@@ -39,6 +40,7 @@ class CreateurPersonnage extends Component {
                     {...this.state.personnage}
                     precedente={this.handleImagePrecedente}
                     suivante={this.handleImageSuivante}
+                    nombrePointsDisponibles={this.state.nombrePointsDisponibles}
                 />
                 <div>Armes</div>
                 <div className="row no-gutters">
