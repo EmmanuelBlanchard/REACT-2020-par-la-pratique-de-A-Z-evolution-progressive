@@ -9,7 +9,7 @@ class ListePersonnage extends Component {
         loading: false,
     }
 
-    componentDidMount = () => {
+    loadData = () => {
         this.setState({loading:true});
         axios.get("https://projet2-createurdepersonnage-default-rtdb.europe-west1.firebasedatabase.app/personnages.json")
             .then(reponse => {
@@ -24,6 +24,17 @@ class ListePersonnage extends Component {
                 this.setState({loading:false});
             })
     }
+
+    componentDidMount = () => {
+        this.loadData();
+     }
+ 
+     componentDidUpdate = (oldProps, oldState) => {
+         if(oldProps.refresh !== this.props.refresh){
+             this.loadData();
+         }
+         
+     }
 
     render() {
         return (
