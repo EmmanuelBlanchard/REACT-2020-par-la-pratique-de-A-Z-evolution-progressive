@@ -17,6 +17,7 @@ class CreateurPersonnage extends Component {
         nombrePointsDisponibles : 7,
         armes : null,
         loading: false,
+        nom : "",
     }
 
     componentDidMount = () => {
@@ -99,18 +100,42 @@ class CreateurPersonnage extends Component {
                 arme:null
             },
             nombrePointsDisponibles : 7,
-            armes : ["epee","fleau","arc","hache"]
+            armes : ["epee","fleau","arc","hache"],
+            loading: false,
+            nom : "",
         })
     }
     
     handleValidation = () => {
-        alert("Personnage créé");
+        this.setState({loading:true});
+        const player = {
+            perso: {...this.state.personnage},
+            nom: this.state.nom
+        }
+        axios.post("https://projet2-createurdepersonnage-default-rtdb.europe-west1.firebasedatabase.app/personnages.json",player)
+            .then(reponse => {
+                console.log(reponse);
+                this.setState({loading:false});
+                this.handleReinitialisation();
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({loading:false});
+                this.handleReinitialisation();
+            })
     }
 
     render() {
         return (
             <div className="container">
                 <TitreH1>Créateur de personnage</TitreH1>
+                {
+                    this.state.loading && <div>Chargement...</div>
+                }
+                <div className="mb-3">
+                    <label htmlFor="inputName" className="form-label">Nom : </label>
+                    <input type="text" className="form-control" id="inputName" value={this.state.nom} onChange={event => this.setState({nom:event.target.value})} />
+                </div>
                 <Personnage 
                     {...this.state.personnage}
                     precedente={this.handleImagePrecedente}
@@ -119,9 +144,6 @@ class CreateurPersonnage extends Component {
                     enleverPoint={this.handleEnleverPoint}
                     ajouterPoint={this.handleAjouterPoint}
                 />
-                {
-                    this.state.loading && <div>Chargement...</div>
-                }
                 {
                     this.state.armes &&
                     <Armes 
