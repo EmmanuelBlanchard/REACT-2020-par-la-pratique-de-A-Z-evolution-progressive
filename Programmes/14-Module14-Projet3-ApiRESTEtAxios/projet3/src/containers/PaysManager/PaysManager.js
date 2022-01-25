@@ -19,9 +19,9 @@ https://restcountries.com/v2/all
 class PaysManager extends Component {
     state = {
         listePays: [],
-        loading : false,
+        loading: false,
         regionSelection: null,
-        nombreDePays: null
+        numeroDePageActuel: 1,
     }
 
     componentDidMount = () => {
@@ -37,8 +37,7 @@ class PaysManager extends Component {
         
         axios.get(`https://restcountries.com/v2/${param}`)
             .then(reponse => {
-                console.log(reponse);
-                const nombreDePays = reponse.data.length;
+                // console.log(reponse);
                 const listePays = reponse.data.map(pays => {
                     // console.log(pays);
                     return {
@@ -53,7 +52,7 @@ class PaysManager extends Component {
                     listePays,
                     loading:false,
                     regionSelection: region,
-                    nombreDePays : nombreDePays
+                    numeroDePageActuel: 1
                 });
             })
             .catch(error => {
@@ -63,6 +62,38 @@ class PaysManager extends Component {
     }
 
     render() {
+        let pagination = [];
+        let listePays = "";
+        if(this.state.listePays) {
+            let fin = this.state.listePays.length/10;
+            if(this.state.listePays.length % 10 !== 0) fin++;
+            for(let i = 1 ; i <= fin ; i++) {
+                pagination.push(
+                    <Bouton 
+                        key={i} 
+                        typeBtn="btn-info" 
+                        css="m-1"
+                        estSelection={this.state.numeroDePageActuel===i}
+                        clic={() => this.setState({numeroDePageActuel:i})}
+                        >{i}</Bouton>
+                );
+            }
+
+            const debutListe = (this.state.numeroDePageActuel-1)*10; 
+            // 0 * 10 = 0 / 1 * 10 = 10 / 2 * 10 = 20
+            // const finListe = (this.state.numeroDePageActuel-1)*10 + 10; 
+            // 0 * 10 + 10 = 10 / 1* 10 + 10 = 20 / 2 * 10 + 10 = 30
+            const finListe = this.state.numeroDePageActuel*10;
+            const listeReduite = this.state.listePays.slice(debutListe,finListe);
+            listePays = listeReduite.map(pays => {
+                    return (
+                        <div className="col-12 col-md-6" key={pays.nom}>
+                            <Pays {...pays}/>
+                        </div>
+                    );
+                })
+        }
+
         return (
             <div className="container">
                 <TitreH1>Liste des pays du monde</TitreH1>
@@ -101,22 +132,16 @@ class PaysManager extends Component {
                     clic={() => this.handleSelectionPaysParRegion("Polar")}
                     estSelection={this.state.regionSelection==="Polar"}
                     >Arctique</Bouton>
-                <div className="d-inline m-3">Nombre de pays : <span className="badge bg-success">{this.state.nombreDePays}</span> 
+                <div className="d-inline m-3">Nombre de pays : <span className="badge bg-success">{this.state.listePays.length}</span> 
                 </div>
                 {
                     this.state.loading 
                     ? <div>Chargement...</div>
                     : <div className="row no-gutters">
-                        {this.state.listePays.map(pays => {
-                            return (
-                                <div className="col-12 col-md-6" key={pays.nom}>
-                                    <Pays {...pays}/>
-                                </div>
-                            );
-                        })}
+                        {listePays}
                     </div>
                 }
-                <div>Pagination</div>
+                <div className="d-flex align-items-center justify-content-center">{pagination}</div>
             </div>
         );
     }
