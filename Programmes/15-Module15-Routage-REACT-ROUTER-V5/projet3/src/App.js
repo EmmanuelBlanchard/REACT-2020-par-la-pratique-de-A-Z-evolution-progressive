@@ -9,6 +9,7 @@ function App() {
       <NavBar />
       <Route path="/" exact render={() => <h1>Page d'accueil</h1>} />
       <Route path="/pays" exact component={PaysManager} />
+      <Route path="/pays/:id" render={(props) => <h1>Page du pays {props.match.params.id}</h1>} />
     </BrowserRouter>
   );
 }
