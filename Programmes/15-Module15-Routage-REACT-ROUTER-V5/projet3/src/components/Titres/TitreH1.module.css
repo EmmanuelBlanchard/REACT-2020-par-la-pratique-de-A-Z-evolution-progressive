@@ -1,0 +1,7 @@
+.policeTitreH1 {
+    font-family: 'Boogaloo', cursive;
+}
+
+.policeTitreH1:hover {
+    color: #20024F!important;
+}
