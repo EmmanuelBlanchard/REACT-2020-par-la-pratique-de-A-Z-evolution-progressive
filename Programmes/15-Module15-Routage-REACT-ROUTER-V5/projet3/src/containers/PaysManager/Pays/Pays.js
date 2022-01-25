@@ -2,6 +2,20 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 const pays = (props) => {
+    let content="";
+    if(!props.solo) { //tous les pays
+        content = (
+            <NavLink to={"/pays/"+props.nom} className="nav-link">Voir la fiche du pays</NavLink>
+        );
+    } else {   
+        content = (
+            <>
+                <div>Monnaie : {props.monnaie}</div>
+                <div>Symbole de la monnaie : {props.monnaieSymbol}</div>
+            </>
+        );
+    }
+
     return (
         <div className="row no-gutters border m-2 p-2">
             <div className="col-4">
@@ -11,7 +25,7 @@ const pays = (props) => {
                 <h2>Nom : {props.nomFrancais}</h2>
                 <div>Capitale : {props.capitale}</div>
                 <div>Region : {props.region}</div>
-                <NavLink to={props.match.url+"/"+props.nom} className="nav-link">Voir la fiche du pays</NavLink>
+                {content}
             </div>
         </div>
     );

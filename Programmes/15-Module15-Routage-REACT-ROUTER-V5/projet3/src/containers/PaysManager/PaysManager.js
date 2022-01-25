@@ -127,11 +127,6 @@ class PaysManager extends Component {
                     clic={() => this.handleSelectionPaysParRegion("Oceania")}
                     estSelection={this.state.regionSelection==="Oceania"}
                     >Océanie</Bouton>
-                <Bouton 
-                    typeBtn="btn-info" 
-                    clic={() => this.handleSelectionPaysParRegion("Polar")}
-                    estSelection={this.state.regionSelection==="Polar"}
-                    >Arctique</Bouton>
                 <div className="d-inline m-3">Nombre de pays : <span className="badge bg-success">{this.state.listePays.length}</span> 
                 </div>
                 {
