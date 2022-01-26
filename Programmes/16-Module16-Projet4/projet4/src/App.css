@@ -1,38 +1,25 @@
-.App {
-  text-align: center;
+h1, h2, h3 {
+  font-family: 'Cabin Sketch', 'Caveat', 'Dancing Script', cursive, sans-serif;
+  font-weight: 700;
+  -webkit-transition: color 2s ease-in-out;
+  transition: color 2s ease-in-out;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1:hover, h2:hover, h3:hover {
+  color: #000000!important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* h1, h2, h3 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+} 
+*/
+
+/* 
+.policeTitreH1 {
+  font-family: 'Boogaloo', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.policeTitreH1:hover {
+  color: #20024F!important;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ */
