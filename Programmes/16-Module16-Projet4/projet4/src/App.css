@@ -9,6 +9,20 @@ h1:hover, h2:hover, h3:hover {
   color: #000000!important;
 }
 
+.auteurImageDonjon {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.site {
+  min-height: 100vh;
+  margin-bottom: -50px;
+}
+
+footer, .minSite {
+  height: 50px;
+}
+
 /* h1, h2, h3 {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 } 
