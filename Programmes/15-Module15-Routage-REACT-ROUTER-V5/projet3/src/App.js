@@ -5,6 +5,7 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Erreur from './components/Erreur/Erreur';
 import Erreur404 from './components/Erreur/Erreur404/Erreur404';
+import './App.css';
 
 function App() {
   return (

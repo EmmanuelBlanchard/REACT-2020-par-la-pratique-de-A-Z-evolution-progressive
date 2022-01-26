@@ -1,0 +1,14 @@
+.active {
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.activeAccueil {
+    background-color:#0156B5; /* #B251AC */
+    font-weight: 600;
+}
+
+.activePays {
+    background-color: #187AC9; /* #38761D */
+    font-weight: 600;
+}
