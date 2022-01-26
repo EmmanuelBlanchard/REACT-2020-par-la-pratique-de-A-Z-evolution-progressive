@@ -18,7 +18,7 @@ class Site extends Component {
                         <Switch>
                             <Route path="/" exact render={() => <Accueil />} />
                             <Route path="/localisation" component={() => <Localisation />} />
-                            <Route path="/contact" render={() => <Contact />} />
+                            <Route path="/contact" render={(props) => <Contact {...props}/>} />
                             <Route render={() => <Route404 />} />
                         </Switch>                    
                     </Container>
