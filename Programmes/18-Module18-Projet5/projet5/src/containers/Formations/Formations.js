@@ -1,22 +1,39 @@
 import TitreH1 from '../../components/Titres/TitreH1';
 import Bouton from '../../components/Bouton/Bouton';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import useLoadData from '../../Hooks/useLoadData';
 
 function Formations() {
     const [formations,loadFormation] = useLoadData();
+    const [categorie,setCategorie] = useState("all");
+
+    const estMonte = useRef(false);
 
     useEffect(() => {
         loadFormation('https://dev.h2prog.com/API_TEST/formations');
     },[]);
 
+    useEffect(() => {
+        if(estMonte.current) {
+            if(categorie !== "all") {
+                loadFormation("https://dev.h2prog.com/API_TEST/formations/"+categorie);
+            } else {
+                loadFormation("https://dev.h2prog.com/API_TEST/formations");
+            } 
+        }
+    },[categorie])
+
+    useEffect(() => {
+        estMonte.current = true;
+    },[])
+
     return (
         <div>
             <TitreH1>Bienvenue sur le site listant les formations H2PROG</TitreH1> 
-            <Bouton typeBtn="btn-outline-secondary" css="m-2">Toutes</Bouton>
-            <Bouton typeBtn="btn-outline-secondary" css="m-2">PHP</Bouton>
-            <Bouton typeBtn="btn-outline-secondary" css="m-2">JavaScript</Bouton>
-            <Bouton typeBtn="btn-outline-secondary" css="m-2">Algorithmique</Bouton>
+            <Bouton typeBtn="btn-outline-secondary" css="m-2" clic={() => setCategorie("all")}>Toutes</Bouton>
+            <Bouton typeBtn="btn-outline-secondary" css="m-2" clic={() => setCategorie("PHP")}>PHP</Bouton>
+            <Bouton typeBtn="btn-outline-secondary" css="m-2" clic={() => setCategorie("JavaScript")}>JavaScript</Bouton>
+            <Bouton typeBtn="btn-outline-secondary" css="m-2" clic={() => setCategorie("Algorithmique")}>Algorithmique</Bouton>
 
             <table className='table'>
                 <thead>
