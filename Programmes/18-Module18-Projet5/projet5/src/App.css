@@ -1,0 +1,17 @@
+h1 {
+    font-family: 'Cabin Sketch', 'Caveat', 'Dancing Script', cursive, sans-serif;
+}
+  
+h2, h3 {
+font-family: 'Caveat', 'Dancing Script', cursive, sans-serif;
+}
+
+h1, h2, h3 {
+font-weight: 700;
+-webkit-transition: color 2s ease-in-out;
+transition: color 2s ease-in-out;
+}
+
+h1:hover, h2:hover, h3:hover {
+color: #000000!important;
+}
